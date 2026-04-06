@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study 3 - Wingspan Booking Platform | Mansi Patel</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAF6F2; --bg2:#F2EFEB; --bg3:#EDEAE5; --card:#E5E1DB;
+  --ink:#272524; --tc:#C4714A; --burg:#591E2C; --line:#CCC8C2;
+  --hl:#FDECC4; --gs:#EAF4EE; --gb:#8BC4A0; --gt:#2D6A4F;
+  --lc:#d6825b; --px:72px; --max:1200px; --lw:280px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.75;}
+
+/* GLOBAL NAV */
+.gnav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(250,246,242,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--px);}
+.gnav .logo{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--ink);text-decoration:none;}
+.gnav-links{display:flex;gap:36px;list-style:none;}
+.gnav-links a{font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;opacity:0.6;transition:opacity 0.2s;}
+.gnav-links a:hover{opacity:1;}
+
+/* PAGE */
+.page{padding-top:56px;}
+.box{max-width:var(--max);margin:0 auto;padding:0 var(--px);}
+
+/* HERO */
+.hero{padding:52px 0 64px;}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.pill{font-size:12px;font-weight:500;padding:4px 14px;border-radius:100px;background:var(--bg3);color:var(--ink);opacity:0.65;border:1px solid var(--line);}
+.hero-img{width:100%;min-height:500px;background:linear-gradient(150deg,#1a1210,#2d1a14,#3a1820);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.img-lbl{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.nda{font-size:11px;color:var(--ink);opacity:0.35;text-align:center;margin-bottom:36px;}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(26px,3vw,40px);font-weight:500;line-height:1.2;letter-spacing:-0.4px;color:var(--ink);margin-bottom:18px;max-width:860px;}
+.hero-sub{font-size:15px;line-height:1.78;color:var(--ink);opacity:0.72;max-width:760px;margin-bottom:36px;}
+
+/* META GRID */
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:28px;}
+.mc{background:var(--bg2);padding:20px 22px;min-width:0;}
+.ml{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);opacity:0.4;margin-bottom:8px;}
+.mv{font-size:15px;font-weight:400;color:var(--ink);line-height:1.55;}
+.mv .sub{font-size:13px;opacity:0.6;display:block;margin-top:3px;}
+
+/* ROLE SECTION */
+.role-hero{background:var(--ink);border-radius:14px;padding:28px 32px;margin-bottom:16px;}
+.rh-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(196,113,74,0.7);margin-bottom:10px;}
+.rh-title{font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:#FAF6F2;margin-bottom:14px;line-height:1.3;}
+.rh-hl{background:rgba(196,113,74,0.28);border-radius:2px;padding:1px 6px;}
+.rh-desc{font-size:14px;color:rgba(250,246,242,0.6);line-height:1.75;}
+.rh-desc strong{color:rgba(250,246,242,0.88);font-weight:600;}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.rc{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px 26px;}
+.rc-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--tc);margin-bottom:14px;}
+.rc ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.rc ul li{font-size:14px;line-height:1.65;color:var(--ink);padding-left:16px;position:relative;}
+.rc ul li::before{content:'•';position:absolute;left:0;color:var(--tc);font-size:13px;line-height:1.7;}
+.rc ul li strong{font-weight:600;}
+.role-note{font-size:14px;line-height:1.8;color:var(--ink);opacity:0.72;margin-bottom:10px;}
+.role-ai{font-size:14px;line-height:1.8;color:var(--ink);opacity:0.58;}
+
+/* AI CARD - subtle/light for CS3 */
+.ai-card{background:var(--bg3);border:1px solid var(--line);border-left:3px solid var(--tc);border-radius:14px;padding:20px 24px;margin-top:24px;}
+.ai-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--tc);margin-bottom:12px;}
+.ai-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ai-card ul li{font-size:14px;line-height:1.7;color:var(--ink);padding-left:16px;position:relative;}
+.ai-card ul li::before{content:'·';position:absolute;left:0;color:var(--tc);font-size:20px;line-height:1.1;}
+.ai-hl{background:var(--hl);border-radius:2px;padding:1px 4px;font-weight:600;}
+
+/* CHAPTER */
+.ch-wrap{width:100%;}
+.ch-wrap.alt{background:var(--bg2);}
+.ch-in{max-width:var(--max);margin:0 auto;padding:64px var(--px);}
+
+/* CHAPTER HEADER — 3-col grid aligned with content below */
+.ch-hdr{display:grid;grid-template-columns:var(--lw) 1fr auto;align-items:baseline;gap:16px;margin-bottom:48px;padding-bottom:20px;border-bottom:2px solid var(--ink);}
+.ch-num{font-family:'Fraunces',serif;font-size:13px;font-weight:400;font-style:italic;color:var(--tc);letter-spacing:0.05em;}
+.ch-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.2vw,28px);font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-0.2px;}
+.ch-sub{font-size:11px;font-weight:500;color:var(--tc);letter-spacing:0.07em;text-transform:uppercase;font-style:italic;opacity:0.7;white-space:nowrap;text-align:right;}
+
+/* TWO COL — label col same width as chapter num col */
+.tc{display:grid;grid-template-columns:var(--lw) 1fr;gap:40px;margin-bottom:48px;}
+.tc:last-child{margin-bottom:0;}
+.tc-label{padding-top:3px;}
+.sl{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--lc);line-height:1.5;}
+.st{font-family:'Fraunces',serif;font-size:16px;font-weight:500;color:var(--ink);margin-top:6px;line-height:1.4;opacity:0.8;}
+
+/* TYPOGRAPHY */
+.bt{font-size:15px;line-height:1.8;color:var(--ink);margin-bottom:16px;}
+.bt:last-child{margin-bottom:0;}
+.hl{background:var(--hl);border-radius:2px;padding:1px 5px;}
+.scroll-hl{background:transparent;border-radius:2px;padding:1px 5px;transition:background 0.7s ease;}
+.scroll-hl.lit{background:var(--hl);}
+.sh{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--ink);margin-bottom:14px;margin-top:28px;line-height:1.3;}
+.sh:first-child{margin-top:0;}
+.sbh{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px;margin-top:22px;}
+.sbh:first-child{margin-top:0;}
+
+/* LISTS */
+.slist{list-style:none;display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.slist li{font-size:15px;line-height:1.72;color:var(--ink);padding-left:18px;position:relative;}
+.slist li::before{content:'•';position:absolute;left:0;color:var(--tc);font-size:14px;line-height:1.6;}
+
+/* TWO-COL CONTENT LIST GRID */
+.list-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}
+.ls-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--tc);margin-bottom:12px;}
+.ls-col ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.ls-col ul li{font-size:14px;line-height:1.65;color:var(--ink);padding-left:16px;position:relative;}
+.ls-col ul li::before{content:'•';position:absolute;left:0;color:var(--tc);font-size:12px;line-height:1.75;}
+
+/* BOOKING MODELS */
+.bm-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.bm-card{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:22px 24px;border-top:2px solid var(--tc);}
+.bm-card h4{font-size:13px;font-weight:600;color:var(--tc);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.bm-card p{font-size:14px;line-height:1.65;color:var(--ink);opacity:0.75;}
+
+/* CHALLENGE HIGHLIGHT BLOCK */
+.ch-highlight{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin:20px 0;}
+.chl-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--tc);margin-bottom:10px;}
+.chl-text{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--ink);line-height:1.4;}
+.chl-items{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px;}
+.chl-item{font-size:13px;color:var(--ink);padding:10px 14px;background:var(--bg);border:1px solid var(--line);border-radius:8px;line-height:1.5;}
+.chl-item .hl{display:inline;}
+
+/* OPTION C STATS — achievement tiles */
+.stats-c{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0;}
+.sc{border-radius:12px;overflow:hidden;border:1px solid var(--line);}
+.sc.dark{grid-column:span 2;}
+.sc-top{background:var(--bg3);padding:14px 18px 12px;}
+.sc-bot{background:var(--bg);padding:12px 18px 16px;border-top:1px solid var(--line);}
+.sc.dark .sc-top{background:var(--ink);}
+.sc.dark .sc-bot{background:#1a1210;border-top:1px solid rgba(255,255,255,0.08);}
+.sc-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);opacity:0.4;margin-bottom:5px;}
+.sc.dark .sc-label{color:rgba(250,246,242,0.4);}
+.sc-context{font-size:13px;font-weight:400;color:var(--ink);opacity:0.55;line-height:1.4;}
+.sc.dark .sc-context{color:rgba(250,246,242,0.45);}
+.sc-now{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--tc);margin-bottom:4px;}
+.sc-val{font-family:'Fraunces',serif;font-size:30px;font-weight:500;color:var(--tc);line-height:1;margin-bottom:4px;}
+.sc.dark .sc-val{font-size:36px;}
+.sc-desc{font-size:12px;color:var(--ink);opacity:0.5;line-height:1.45;}
+.sc.dark .sc-desc{color:rgba(250,246,242,0.45);}
+
+/* IMPACT QUAL GRID */
+.qual-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.qs-col{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:22px 24px;}
+.qs-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--tc);margin-bottom:14px;}
+.qs-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.qs-col ul li{font-size:14px;line-height:1.65;color:var(--ink);padding-left:16px;position:relative;}
+.qs-col ul li::before{content:'•';position:absolute;left:0;color:var(--tc);font-size:12px;line-height:1.75;}
+
+/* ORG WINS */
+.org-wins{background:var(--gs);border:1px solid var(--gb);border-radius:14px;padding:24px 28px;margin-top:20px;}
+.ow-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gt);margin-bottom:10px;}
+.org-wins p{font-size:15px;line-height:1.78;color:var(--ink);}
+
+/* REFLECTION */
+.ref-block{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin-top:20px;}
+.ref-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--tc);margin-bottom:14px;}
+.ref-block ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ref-block ul li{font-size:14px;line-height:1.7;color:var(--ink);padding-left:18px;position:relative;}
+.ref-block ul li::before{content:'•';position:absolute;left:0;color:var(--tc);font-size:13px;line-height:1.7;}
+
+/* LOCKED NAV — Variation 1+3 Hybrid, 240px thumb, both pointing back */
+.cs-nav-section{padding:64px 0;border-top:1px solid var(--line);}
+.cs-nav-box{max-width:var(--max);margin:0 auto;padding:0 var(--px);}
+.cs-nav-lbl{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);opacity:0.38;margin-bottom:24px;}
+.cs-nav-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.cs-card{border-radius:14px;overflow:hidden;border:1px solid var(--line);text-decoration:none;display:block;transition:border-color 0.22s;}
+.cs-card:hover{border-color:var(--tc);}
+.cs-thumb{height:240px;background:linear-gradient(150deg,#1a1210,#2d1a14,#3a1820);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px;}
+.cs-ghost{position:absolute;bottom:-16px;right:-6px;font-family:'Fraunces',serif;font-size:120px;font-weight:400;color:rgba(255,255,255,0.055);line-height:1;user-select:none;pointer-events:none;}
+.cs-dir{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.4);}
+.cs-tag-img{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.28);}
+.cs-body{padding:18px 20px 22px;background:var(--bg);}
+.cs-case{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--line);margin-bottom:6px;}
+.cs-title{font-family:'Fraunces',serif;font-size:15px;font-weight:500;color:var(--ink);line-height:1.35;margin-bottom:8px;transition:color 0.2s;}
+.cs-card:hover .cs-title{color:var(--tc);}
+.cs-desc{font-size:12px;color:var(--ink);opacity:0.5;line-height:1.4;margin-bottom:14px;}
+.cs-cta{font-size:13px;font-weight:600;color:var(--tc);}
+
+/* SUBSCRIBE */
+.sub-sep{height:1px;background:var(--line);}
+.sub-section{background:var(--bg2);border-top:1px solid var(--line);padding:60px var(--px);text-align:center;}
+.sub-section h3{font-family:'Fraunces',serif;font-size:22px;font-weight:500;color:var(--ink);margin-bottom:8px;}
+.sub-section p{font-size:15px;color:var(--ink);opacity:0.55;margin-bottom:24px;}
+.sub-form{display:flex;gap:10px;max-width:420px;margin:0 auto;}
+.sub-form input{flex:1;padding:11px 18px;border-radius:100px;border:1px solid var(--line);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);outline:none;}
+.sub-form input:focus{border-color:var(--tc);}
+.btn{display:inline-flex;align-items:center;padding:11px 22px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--ink);color:var(--bg);transition:background 0.2s;white-space:nowrap;}
+.btn:hover{background:var(--burg);}
+
+/* FOOTER */
+.footer{background:var(--ink);padding:40px var(--px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Fraunces',serif;font-size:17px;font-weight:500;color:rgba(250,246,242,0.88);}
+.footer-copy{font-size:12px;color:rgba(250,246,242,0.3);}
+.footer-links{display:flex;gap:24px;list-style:none;}
+.footer-links a{font-size:13px;font-weight:500;color:rgba(250,246,242,0.45);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(250,246,242,0.88);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  :root{--px:24px;--lw:140px;}
+  .tc{grid-template-columns:1fr;gap:10px;}
+  .ch-hdr{grid-template-columns:auto 1fr;}
+  .ch-sub{display:none;}
+  .meta{grid-template-columns:1fr 1fr;}
+  .role-grid,.bm-grid,.list-split,.qual-split,.chl-items{grid-template-columns:1fr;}
+  .stats-c{grid-template-columns:1fr;}
+  .sc.dark{grid-column:span 1;}
+  .cs-nav-grid{grid-template-columns:1fr;}
+  .footer{padding:36px 24px;flex-direction:column;text-align:center;}
+  .sub-section{padding:48px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <a href="#" class="logo">Mansi Patel</a>
+  <ul class="gnav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Let's Connect</a></li>
+  </ul>
+</nav>
+
+<div class="page" id="top">
+  <section class="hero">
+    <div class="box">
+
+      <div class="eyebrow">
+        <span class="pill">EdTech</span>
+        <span class="pill">Scheduling Systems</span>
+        <span class="pill">Operational Platforms</span>
+        <span class="pill">Organizational Wellness</span>
+        <span class="pill">Service Design</span>
+      </div>
+
+      <div class="hero-img"><span class="img-lbl">Hero Image / Banner</span></div>
+      <p class="nda">*Client identity confidential.</p>
+
+      <h1 class="hero-title">From Scheduling Chaos to a Capacity-Aware Booking Platform for 15K+ Students</h1>
+
+      <p class="hero-sub">In a 12-day design sprint, our team delivered the first MVP of a system that transformed how university students access gym facilities, yoga classes, and wellness activities - replacing fragmented scheduling processes with a capacity-aware booking platform designed for fairness, operational clarity, and scale.</p>
+
+      <p class="hero-sub" style="margin-top:-16px;font-weight:600;opacity:1;color:var(--ink);font-size:15px;">Delivered first MVP in 12 days.</p>
+
+      <!-- META GRID -->
+      <div class="meta reveal">
+        <div class="mc">
+          <div class="ml">Platform</div>
+          <div class="mv">Student Portal<span class="sub">Desktop Web - Mobile Responsive - Mobile App</span><span class="sub">Admin Operations Dashboard</span></div>
+        </div>
+        <div class="mc">
+          <div class="ml">Timeline</div>
+          <div class="mv">Discovery: ~2 weeks<span class="sub">MVP Design Sprint: 12 days</span><span class="sub">Product Iterations & Expansion: ~8 months</span></div>
+        </div>
+        <div class="mc">
+          <div class="ml">Team</div>
+          <div class="mv">4 Core Designers + 3 for Sprint<span class="sub">Product Owner Team</span><span class="sub">Engineering Team</span><span class="sub">University Stakeholders</span></div>
+        </div>
+        <div class="mc">
+          <div class="ml">My Role</div>
+          <div class="mv">Product Designer<span class="sub">De-facto Design Lead</span></div>
+        </div>
+      </div>
+
+      <!-- ROLE SECTION -->
+      <div class="role-hero reveal" style="margin-top:24px;">
+        <div class="rh-eyebrow">My Role & Contribution</div>
+        <div class="rh-title"><span class="rh-hl">Product Designer & De-facto Design Lead</span></div>
+        <div class="rh-desc">Although my official role was Product Designer, I functioned as the acting UX lead, owning both the product design direction and UX team coordination. The project started as a 1-month pilot, but after delivering the first MVP in <strong>12 working days</strong>, it expanded into an <strong>11-month multi-module platform build.</strong></div>
+      </div>
+
+      <div class="role-grid reveal">
+        <div class="rc">
+          <div class="rc-label">Product Design Contributions</div>
+          <ul>
+            <li>Requirement discovery and stakeholder workshops with university teams</li>
+            <li>Product brainstorming and feature ideation</li>
+            <li>User flows and information architecture for complex booking workflows</li>
+            <li>Low- and high-fidelity wireframes</li>
+            <li><strong>70+ production-ready screens</strong> during the MVP phase</li>
+            <li>Structuring booking models for facility slots (gym) and scheduled classes (yoga)</li>
+            <li>Designing the capacity-aware booking system</li>
+          </ul>
+        </div>
+        <div class="rc">
+          <div class="rc-label">Design Leadership & Project Ownership</div>
+          <ul>
+            <li>Planning work distribution during the <strong>12-day MVP sprint</strong></li>
+            <li>Leading the 4-designer core team across the project tenure</li>
+            <li>Scaling the team to <strong>7 designers</strong> during the sprint phase</li>
+            <li>Structuring design tasks, timelines, and estimations</li>
+            <li>Driving internal design reviews and quality checks</li>
+            <li>Presenting designs to client and engineering stakeholders</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="role-note reveal">To accelerate decisions during the sprint, we used a wall-flow design approach, mapping entire user journeys with hand-sketched screens. This helped stakeholders review workflows quickly and reduced iteration cycles before moving to high-fidelity design.</p>
+      <p class="role-ai reveal">AI-assisted features in Miro were used to keep boards structured and organized, helping maintain clarity while working across multiple designers and flows.</p>
+
+      <!-- AI IN CONTEXT — subtle -->
+      <div class="ai-card reveal">
+        <div class="ai-label">AI in Context</div>
+        <ul>
+          <li><span class="ai-hl">Limited AI usage during this project timeline (early 2023)</span>, primarily used for organizing design boards and maintaining clarity in collaborative spaces</li>
+          <li>This project was largely driven through manual design thinking, team coordination, and rapid decision-making under tight timelines</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CHAPTER 0 -->
+  <div class="ch-wrap" id="ch0">
+    <div class="ch-in">
+
+      <div class="ch-hdr">
+        <span class="ch-num">Chapter 0</span>
+        <h2 class="ch-title">Executive Snapshot</h2>
+        <span class="ch-sub">TL;DR</span>
+      </div>
+
+      <!-- THE ORGANIZATION -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Organization</div>
+          <div class="st">The Ecosystem We Operate In</div>
+        </div>
+        <div>
+          <h3 class="sh">Infosys WingSpan - a White-label Digital Platform for Learning and Campus Ecosystems</h3>
+          <p class="bt">Infosys developed WingSpan, a digital platform designed to power learning, operations, and engagement ecosystems for organizations and educational institutions. The platform was built as a <strong>white-label product</strong> — it could be adapted and branded for different universities or enterprises while sharing the same core technology infrastructure.</p>
+          <p class="bt">While the platform was internally used within Infosys under the name Lex, the broader WingSpan ecosystem was designed to support external institutions as well. To validate and expand the product's capabilities, Infosys partnered with universities to implement modules addressing campus operations and student services.</p>
+          <h4 class="sbh">The First Implementation Client</h4>
+          <p class="bt">One of the first universities to adopt the system was a large multi-campus institution with thousands of students distributed across multiple cities in India. The institution actively promotes sports, fitness, and wellness activities as part of student life. Each campus includes facilities such as gyms, yoga programs, sports activities, recreational clubs, and wellness centers. However, these services were still being managed through manual processes and fragmented coordination — making it an ideal environment to pilot and refine the platform.</p>
+        </div>
+      </div>
+
+      <!-- THE PROJECT -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Project</div>
+          <div class="st">System and Product Overview</div>
+        </div>
+        <div>
+          <h3 class="sh">A Digital Platform for Managing Campus Wellness and Recreational Activities</h3>
+          <p class="bt">The product was a <strong>capacity-aware booking platform</strong> that allowed students to reserve access to campus facilities and activities such as gym sessions, yoga classes, and other wellness or recreational programs.</p>
+          <p class="bt">The system needed to support two fundamentally different booking models:</p>
+          <div class="bm-grid">
+            <div class="bm-card">
+              <h4>Facility Slot Booking</h4>
+              <p>Continuous time slots across the day — e.g. gym access. Students book a time window, capacity is monitored in real time.</p>
+            </div>
+            <div class="bm-card">
+              <h4>Scheduled Class Booking</h4>
+              <p>Fixed sessions occurring at specific times and days — e.g. yoga or training sessions. Structured enrollment with defined capacity per session.</p>
+            </div>
+          </div>
+          <p class="bt">The platform included student portals (desktop web, responsive mobile, mobile app) and admin dashboards for managing schedules, capacities, and operational visibility. These booking models were designed to be <strong>scalable and reusable</strong> across other campus services — tennis courts, badminton courts, volleyball, chess, recreational workshops, and mental health consultations.</p>
+        </div>
+      </div>
+
+      <!-- THE CHALLENGE -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Challenge</div>
+          <div class="st">Where the System Was Breaking Down</div>
+        </div>
+        <div>
+          <h3 class="sh"><strong>When Student Motivation Meets Operational Chaos</strong></h3>
+          <p class="bt">Universities actively promoted sports, fitness, and wellness programs, but operational limitations prevented students from accessing them effectively. At peak hours, gym facilities faced long queues and overcrowding, while during other hours resources remained underutilized. Students often had no visibility into slot availability, leading to frustration and inefficient facility usage.</p>
+          <p class="bt">From the administrative side, managing schedules and capacities was largely manual, making it difficult to balance demand, ensure fairness, and monitor facility utilization.</p>
+
+          <div class="ch-highlight">
+            <div class="chl-eyebrow">The Core Problem</div>
+            <div class="chl-text">The issue wasn't simply booking slots. <strong>It was balancing demand and capacity across time.</strong></div>
+            <div class="chl-items">
+              <div class="chl-item"><span class="hl">Overcrowded peak hours</span> — long queues, no advance booking</div>
+              <div class="chl-item"><span class="hl">Underutilized off-peak capacity</span> — same facilities sat nearly empty</div>
+              <div class="chl-item"><span class="hl">No visibility into availability</span> — students had no way to plan ahead</div>
+            </div>
+          </div>
+
+          <p class="bt" style="margin-top:16px;">The university needed a system that could <strong>distribute demand more intelligently</strong> while keeping access fair for thousands of students.</p>
+        </div>
+      </div>
+
+      <!-- THE SOLUTION -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Solution</div>
+          <div class="st">The Strategic Intervention</div>
+        </div>
+        <div>
+          <h3 class="sh">Designing a <strong>Capacity-Aware Booking System</strong> for Campus Activities</h3>
+          <p class="bt">The product streamlined how campus wellness and recreational facilities were accessed and managed. Together, these systems ensured <span class="scroll-hl">fair access for students</span> while giving administrators better control over facility operations.</p>
+
+          <div class="list-split" style="grid-template-columns:1fr;gap:20px;">
+            <div class="ls-col">
+              <h4>For Students</h4>
+              <ul>
+                <li><span class="scroll-hl">Smart slot booking</span> for high-demand facilities like gyms</li>
+                <li>Structured class booking for scheduled activities such as yoga or training sessions</li>
+                <li><span class="scroll-hl">Real-time visibility of slot availability</span> and capacity</li>
+                <li>A simple and consistent booking experience across devices</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Student mockup placeholder -->
+          <div style="width:100%;min-height:360px;background:linear-gradient(150deg,#1a1210,#2d1a14,#3a1820);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:16px 0 28px;position:relative;">
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);">Student Portal Mockup</span>
+          </div>
+
+          <div class="list-split" style="grid-template-columns:1fr;gap:20px;">
+            <div class="ls-col">
+              <h4>For Administrators</h4>
+              <ul>
+                <li>Admin dashboards to configure schedules, classes, and facility capacities</li>
+                <li>Operational visibility into slot utilization and peak demand</li>
+                <li>Tools to manage bookings, cancellations, and attendance</li>
+                <li>A scalable structure to support multiple campus services</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Admin mockup placeholder -->
+          <div style="width:100%;min-height:360px;background:linear-gradient(150deg,#1a1210,#2d1a14,#3a1820);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:16px 0 0;position:relative;">
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);">Admin Dashboard Mockup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE IMPACT -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Impact</div>
+          <div class="st">What Changed - Measurably</div>
+        </div>
+        <div>
+          <h3 class="sh">Improved Access to Campus Wellness While Enabling Smarter Facility Operations</h3>
+          <p class="bt">Within a 12-day sprint, we delivered the first working MVP of a capacity-aware booking platform that improved access to campus wellness facilities for students while giving administrators better control over facility operations.</p>
+
+          <!-- OPTION C STATS — all light, same visual weight -->
+          <div class="stats-c">
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">MVP delivered in</div>
+                <div class="sc-context">From brief to first working MVP</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Achieved</div>
+                <div class="sc-val">12 days</div>
+                <div class="sc-desc">A 1-month pilot that shipped ahead of any expectation, accelerating stakeholder alignment.</div>
+              </div>
+            </div>
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Engagement expanded</div>
+                <div class="sc-context">Started as a 1-month pilot</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Grew to</div>
+                <div class="sc-val">11 months</div>
+                <div class="sc-desc">Multi-module platform build after MVP delivery</div>
+              </div>
+            </div>
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Screens shipped in MVP phase</div>
+                <div class="sc-context">Student portal + admin dashboard</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Delivered</div>
+                <div class="sc-val">70+</div>
+                <div class="sc-desc">Production-ready screens across web, mobile, and admin</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qual impact -->
+          <div class="qual-split">
+            <div class="qs-col">
+              <h4>Student Experience</h4>
+              <ul>
+                <li>Reduced uncertainty around facility access through real-time slot visibility</li>
+                <li>Minimized long queues for high-demand facilities through advance booking</li>
+                <li>Improved access to yoga classes and other structured wellness activities</li>
+                <li>Simple and consistent booking experience across web and mobile</li>
+              </ul>
+            </div>
+            <div class="qs-col">
+              <h4>Administrative Operations</h4>
+              <ul>
+                <li>Centralized management of facility schedules and capacities</li>
+                <li>Reduced manual coordination in managing bookings and attendance</li>
+                <li>Improved visibility into facility utilization and peak demand periods</li>
+                <li>Ability to configure and manage multiple wellness and recreational programs</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="org-wins">
+            <div class="ow-label">Organizational Wins for Infosys</div>
+            <p>The project <strong>validated the feasibility of a white-label campus services platform</strong> that could be adapted for multiple universities and large organizations. Delivering the first MVP within 12 working days helped accelerate stakeholder alignment and expand the engagement into an 11-month multi-module platform build, establishing a scalable foundation for managing campus wellness, sports, and recreational services.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- REFLECTION -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">Reflection</div>
+          <div class="st">Where AI Could Have Accelerated This</div>
+        </div>
+        <div>
+          <p class="bt">This project predates widespread AI tooling (early 2023). Looking back, there are clear places where AI could have meaningfully reduced the manual effort required at this scale.</p>
+          <div class="ref-block">
+            <div class="ref-label">Where AI Could Have Helped</div>
+            <ul>
+              <li><span class="scroll-hl">Sprint planning and team coordination</span> at this scale required significant manual effort. AI could streamline task structuring, work distribution, and progress tracking across a multi-designer team</li>
+              <li><span class="scroll-hl">During ideation</span>, exploring booking models, edge cases, and alternative flows required multiple rounds of manual iteration. AI could act as a rapid exploration partner, helping expand and validate directions faster</li>
+              <li>Early concept visualization was time-intensive, relying on sketches and gradual refinement. <span class="scroll-hl">AI-assisted prototyping</span> could accelerate this by quickly translating ideas into tangible interfaces</li>
+              <li>Documentation and iteration tracking across an 11-month build required continuous effort. AI could simplify this by structuring updates and maintaining design continuity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- CS NAVIGATION — both pointing back, 240px thumb -->
+<div class="cs-nav-section">
+  <div class="cs-nav-box">
+    <div class="cs-nav-lbl">More Case Studies</div>
+    <div class="cs-nav-grid">
+
+      <a href="#" class="cs-card">
+        <div class="cs-thumb">
+          <div class="cs-ghost">01</div>
+          <div class="cs-dir">&#8592; Case Study 01</div>
+          <div class="cs-tag-img">Alert Governance</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-case">Case Study 01</div>
+          <div class="cs-title">Insight-Driven Governance to Guide Global Operations Across 70,000+ Connected Forklifts</div>
+          <div class="cs-desc">Centralised governance layer to detect abnormal SMS alert spikes and restore operational trust across a global industrial fleet.</div>
+          <div class="cs-cta">&#8592; View Case Study</div>
+        </div>
+      </a>
+
+      <a href="#" class="cs-card">
+        <div class="cs-thumb">
+          <div class="cs-ghost">02</div>
+          <div class="cs-dir">&#8592; Case Study 02</div>
+          <div class="cs-tag-img">Workflow Optimization</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-case">Case Study 02</div>
+          <div class="cs-title">Optimizing High-Frequency Workflows Warehouse Supervisors Rely on Everyday Across 70,000+ Vehicles</div>
+          <div class="cs-desc">Invented the 8+2 Search Logic and reimagined the interface to eliminate performance bottlenecks and interaction overhead.</div>
+          <div class="cs-cta">&#8592; View Case Study</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<div class="sub-sep"></div>
+
+<!-- SUBSCRIBE -->
+<div class="sub-section">
+  <h3>Stay in the loop</h3>
+  <p>Occasional notes on enterprise UX, systems thinking, and what I'm learning.</p>
+  <div class="sub-form">
+    <input type="email" placeholder="your@email.com">
+    <button class="btn">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Mansi Patel</div>
+  <ul class="footer-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Let's Connect</a></li>
+  </ul>
+  <p class="footer-copy">&#169; 2026 Mansi Patel - Designed dot by dot. Co-created with Claude and Figma Make</p>
+</footer>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+function checkReveal(){reveals.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('visible');});}
+const scrollHls=document.querySelectorAll('.scroll-hl');
+function checkScrollHl(){scrollHls.forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight-50&&r.bottom>0)el.classList.add('lit');});}
+window.addEventListener('scroll',()=>{checkReveal();checkScrollHl();},{passive:true});
+checkReveal();checkScrollHl();
+</script>
+</body>
+</html>
