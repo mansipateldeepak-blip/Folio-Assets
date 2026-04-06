@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study 2 - Vehicle Page Optimization | Mansi Patel</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF6F2;
+  --bg2: #F2EFEB;
+  --bg3: #EDEAE5;
+  --card: #E5E1DB;
+  --ink: #272524;
+  --tc: #C4714A;
+  --burg: #591E2C;
+  --line: #CCC8C2;
+  --highlight: #FDECC4;
+  --green-soft: #EAF4EE;
+  --green-border: #8BC4A0;
+  --green-text: #2D6A4F;
+  --label-color: #d6825b;
+  --px: 72px;
+  --max: 1200px;
+  --lw: 280px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.75; }
+
+/* GLOBAL NAV */
+.gnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(250,246,242,0.96); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line); height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--px);
+}
+.gnav .logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: var(--ink); text-decoration: none; }
+.gnav-links { display: flex; gap: 36px; list-style: none; }
+.gnav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
+.gnav-links a:hover { opacity: 1; }
+
+/* PAGE */
+.page { padding-top: 56px; }
+.box { max-width: var(--max); margin: 0 auto; padding: 0 var(--px); }
+
+/* HERO */
+.hero { padding: 52px 0 64px; }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.pill { font-size: 12px; font-weight: 500; padding: 4px 14px; border-radius: 100px; background: var(--bg3); color: var(--ink); opacity: 0.65; border: 1px solid var(--line); }
+.hero-img { width: 100%; min-height: 500px; background: linear-gradient(150deg,#1a1210,#2d1a14,#3a1820); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.img-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+.nda { font-size: 11px; color: var(--ink); opacity: 0.35; text-align: center; margin-bottom: 36px; }
+.hero-title { font-family: 'Fraunces', serif; font-size: clamp(26px,3vw,40px); font-weight: 500; line-height: 1.2; letter-spacing: -0.4px; color: var(--ink); margin-bottom: 18px; max-width: 860px; }
+.hero-sub { font-size: 15px; line-height: 1.78; color: var(--ink); opacity: 0.72; max-width: 760px; margin-bottom: 36px; }
+
+/* META GRID */
+.meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-bottom: 28px; }
+.mc { background: var(--bg2); padding: 20px 22px; min-width: 0; }
+.ml { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.4; margin-bottom: 8px; }
+.mv { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.55; }
+.mv .sub { font-size: 13px; opacity: 0.6; display: block; margin-top: 3px; }
+
+/* AI CARD */
+.ai-card { background: var(--bg3); border: 1px solid var(--line); border-left: 3px solid var(--tc); border-radius: 14px; padding: 22px 26px; }
+.ai-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tc); margin-bottom: 14px; }
+.ai-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.ai-card ul li { font-size: 14px; line-height: 1.7; color: var(--ink); padding-left: 16px; position: relative; }
+.ai-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--tc); font-size: 20px; line-height: 1.1; }
+.ai-hl { background: var(--highlight); border-radius: 2px; padding: 1px 4px; font-weight: 600; }
+
+/* CHAPTER */
+.ch-wrap { width: 100%; }
+.ch-wrap.alt { background: var(--bg2); }
+.ch-in { max-width: var(--max); margin: 0 auto; padding: 64px var(--px); }
+
+/* CHAPTER HEADER */
+.ch-hdr {
+  display: grid;
+  grid-template-columns: var(--lw) 1fr auto;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--ink);
+}
+.ch-num { font-family: 'Fraunces', serif; font-size: 13px; font-weight: 400; font-style: italic; color: var(--tc); letter-spacing: 0.05em; }
+.ch-title { font-family: 'Fraunces', serif; font-size: clamp(20px,2.2vw,28px); font-weight: 500; color: var(--ink); line-height: 1.2; letter-spacing: -0.2px; }
+.ch-sub { font-size: 11px; font-weight: 500; color: var(--tc); letter-spacing: 0.07em; text-transform: uppercase; font-style: italic; opacity: 0.7; white-space: nowrap; text-align: right; }
+
+/* TWO COL */
+.tc { display: grid; grid-template-columns: var(--lw) 1fr; gap: 40px; margin-bottom: 48px; }
+.tc:last-child { margin-bottom: 0; }
+.tc-label { padding-top: 3px; }
+.sl { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label-color); line-height: 1.5; }
+.st { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-top: 6px; line-height: 1.4; opacity: 0.8; }
+
+/* TYPOGRAPHY */
+.bt { font-size: 15px; line-height: 1.8; color: var(--ink); margin-bottom: 16px; }
+.bt:last-child { margin-bottom: 0; }
+.hl { background: var(--highlight); border-radius: 2px; padding: 1px 5px; }
+.sh { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; color: var(--ink); margin-bottom: 14px; margin-top: 28px; line-height: 1.3; }
+.sh:first-child { margin-top: 0; }
+.sbh { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 10px; margin-top: 22px; }
+.sbh:first-child { margin-top: 0; }
+.scroll-hl { background: transparent; border-radius: 2px; padding: 1px 5px; transition: background 0.7s ease; }
+.scroll-hl.lit { background: var(--highlight); }
+
+/* LISTS */
+.slist { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.slist li { font-size: 15px; line-height: 1.72; color: var(--ink); padding-left: 18px; position: relative; }
+.slist li::before { content: '•'; position: absolute; left: 0; color: var(--tc); font-size: 14px; line-height: 1.6; }
+
+/* FRICTION CARDS */
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.fc { background: var(--bg3); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; border-top: 2px solid var(--tc); }
+.fc h4 { font-size: 13px; font-weight: 600; color: var(--tc); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+.fc p { font-size: 13px; line-height: 1.65; color: var(--ink); margin-bottom: 12px; }
+.fc ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.fc ul li { font-size: 14px; line-height: 1.65; color: var(--ink); padding-left: 18px; position: relative; }
+.fc ul li::before { content: '•'; position: absolute; left: 0; color: var(--tc); font-size: 13px; line-height: 1.7; }
+
+/* INTERVENTION */
+.iblock { background: var(--bg3); border: 1px solid var(--line); border-radius: 12px; padding: 22px 26px; margin: 14px 0; }
+.ilabel { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tc); margin-bottom: 12px; }
+.iblock ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.iblock ul li { font-size: 14px; line-height: 1.7; color: var(--ink); padding-left: 18px; position: relative; }
+.iblock ul li::before { content: '•'; position: absolute; left: 0; color: var(--tc); font-size: 13px; line-height: 1.7; }
+
+/* ── OPTION C STATS ── */
+.stats-c { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0; }
+.sc { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.sc-top { background: var(--bg3); padding: 14px 18px 12px; }
+.sc-bot { background: var(--bg); padding: 12px 18px 16px; border-top: 1px solid var(--line); }
+.sc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); opacity: 0.4; margin-bottom: 5px; }
+.sc-before { font-size: 14px; font-weight: 500; color: var(--ink); opacity: 0.38; text-decoration: line-through; }
+.sc-now { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--tc); margin-bottom: 4px; }
+.sc-val { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 500; color: var(--tc); line-height: 1; margin-bottom: 4px; }
+.sc-desc { font-size: 12px; color: var(--ink); opacity: 0.5; line-height: 1.45; }
+.sc-wide { grid-column: span 2; }
+.sc-wide .sc-val { font-size: 22px; line-height: 1.2; }
+
+/* OUTCOME */
+.outcome { background: var(--green-soft); border: 1px solid var(--green-border); border-radius: 14px; padding: 26px 30px; margin: 24px 0; }
+.olabel { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-text); margin-bottom: 12px; }
+.outcome p { font-size: 15px; line-height: 1.78; color: var(--ink); margin-bottom: 10px; }
+.outcome p:last-child { margin-bottom: 0; }
+
+/* ── LOCKED NAV — Variation 1+3 Hybrid ── */
+.cs-nav-section { padding: 64px 0; border-top: 1px solid var(--line); }
+.cs-nav-box { max-width: var(--max); margin: 0 auto; padding: 0 var(--px); }
+.cs-nav-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.38; margin-bottom: 24px; }
+.cs-nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cs-card { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); text-decoration: none; display: block; transition: border-color 0.22s; }
+.cs-card:hover { border-color: var(--tc); }
+.cs-thumb { height: 180px; background: linear-gradient(150deg,#1a1210,#2d1a14,#3a1820); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; }
+.cs-ghost { position: absolute; bottom: -16px; right: -6px; font-family: 'Fraunces', serif; font-size: 110px; font-weight: 400; color: rgba(255,255,255,0.055); line-height: 1; user-select: none; pointer-events: none; }
+.cs-dir { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); }
+.cs-tag-img { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); }
+.cs-body { padding: 18px 20px 22px; background: var(--bg); }
+.cs-case { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--line); margin-bottom: 6px; }
+.cs-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 8px; transition: color 0.2s; }
+.cs-card:hover .cs-title { color: var(--tc); }
+.cs-desc { font-size: 12px; color: var(--ink); opacity: 0.5; line-height: 1.4; margin-bottom: 14px; }
+.cs-cta { font-size: 13px; font-weight: 600; color: var(--tc); }
+
+/* SUBSCRIBE */
+.sub-section { background: var(--bg2); border-top: 1px solid var(--line); padding: 60px var(--px); text-align: center; }
+.sub-section h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.sub-section p { font-size: 15px; color: var(--ink); opacity: 0.55; margin-bottom: 24px; }
+.sub-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+.sub-form input { flex: 1; padding: 11px 18px; border-radius: 100px; border: 1px solid var(--line); background: var(--bg); font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink); outline: none; }
+.sub-form input:focus { border-color: var(--tc); }
+.btn { display: inline-flex; align-items: center; padding: 11px 22px; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; border: none; background: var(--ink); color: var(--bg); transition: background 0.2s; white-space: nowrap; }
+.btn:hover { background: var(--burg); }
+
+/* FOOTER */
+.footer { background: var(--ink); padding: 40px var(--px); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; color: rgba(250,246,242,0.88); }
+.footer-copy { font-size: 12px; color: rgba(250,246,242,0.3); }
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links a { font-size: 13px; font-weight: 500; color: rgba(250,246,242,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(250,246,242,0.88); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  :root { --px: 24px; --lw: 140px; }
+  .tc { grid-template-columns: 1fr; gap: 10px; }
+  .ch-hdr { grid-template-columns: auto 1fr; }
+  .ch-sub { display: none; }
+  .meta { grid-template-columns: 1fr 1fr; }
+  .fgrid { grid-template-columns: 1fr; }
+  .stats-c { grid-template-columns: 1fr 1fr; }
+  .sc-wide { grid-column: span 2; }
+  .cs-nav-grid { grid-template-columns: 1fr; }
+  .footer { padding: 36px 24px; flex-direction: column; text-align: center; }
+  .sub-section { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <a href="#" class="logo">Mansi Patel</a>
+  <ul class="gnav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Let's Connect</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <section class="hero">
+    <div class="box">
+
+      <div class="eyebrow">
+        <span class="pill">Enterprise UX</span>
+        <span class="pill">Workflow Optimization</span>
+        <span class="pill">Warehouse Operations</span>
+        <span class="pill">Data-Heavy Interfaces</span>
+      </div>
+
+      <div class="hero-img"><span class="img-label">Hero Image / Banner</span></div>
+      <p class="nda">*Metrics shown are directional due to NDA.</p>
+
+      <h1 class="hero-title">Optimizing High-Frequency Workflows Warehouse Supervisors Rely on Everyday Across 70,000+ Vehicles</h1>
+      <p class="hero-sub">Warehouse supervisors interact with operational systems dozens of times daily. In warehouse logistics environments, even small inefficiencies compound quickly. Inside a global telematics platform, the most frequently used page had quietly become the one users relied on most - and disliked most.</p>
+
+      <div class="meta reveal">
+        <div class="mc"><div class="ml">Role</div><div class="mv">Lead Product Designer<span class="sub">Research - Interaction Design - Workflow Redesign - Stakeholder Collaboration</span></div></div>
+        <div class="mc"><div class="ml">Timeline</div><div class="mv">6 Weeks</div></div>
+        <div class="mc"><div class="ml">Platform</div><div class="mv">Web Application<span class="sub">Enterprise Telematics Platform</span></div></div>
+        <div class="mc"><div class="ml">Team</div><div class="mv">1 Product Designer<span class="sub">2 Product Owners - Full-stack Engineering - Platform Architecture Team</span></div></div>
+      </div>
+
+      <div class="ai-card reveal" style="margin-top:24px;">
+        <div class="ai-label">AI in Action</div>
+        <ul>
+          <li><span class="ai-hl">Used AI as a thinking partner to explore interaction patterns, edge cases, and simplify product reasoning</span> during workflow redesign</li>
+          <li><span class="ai-hl">Reduced manual effort and sped up iteration cycles</span> - leveraged AI for UX copy, naming, and stakeholder communication</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ch-wrap" id="ch0">
+    <div class="ch-in">
+
+      <div class="ch-hdr">
+        <span class="ch-num">Chapter 0</span>
+        <h2 class="ch-title">Executive Snapshot</h2>
+        <span class="ch-sub">TL;DR</span>
+      </div>
+
+      <!-- THE COMPANY -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Company</div>
+          <div class="st">The Ecosystem We Operate In</div>
+        </div>
+        <div>
+          <h3 class="sh">Global Industrial Equipment Manufacturer Powering Warehouse Operations</h3>
+          <p class="bt">A global manufacturer of industrial vehicles used in large warehouse and logistics operations. Its equipment powers distribution centers where <strong>fleet uptime, safety compliance, and operational visibility directly impact operational throughput.</strong></p>
+          <p class="bt">To support modern warehouse environments, the company operates an enterprise telematics ecosystem that streams operational data from connected industrial vehicles deployed across customer sites. This digital infrastructure allows supervisors to monitor fleet activity, manage inspection workflows, and maintain operational control across large warehouse fleets.</p>
+        </div>
+      </div>
+
+      <!-- THE PROJECT -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Project</div>
+          <div class="st">System and Product Overview</div>
+        </div>
+        <div>
+          <h3 class="sh">Enterprise Telematics Platform for Fleet Operations</h3>
+          <p class="bt">The organization operates an enterprise telematics platform used to monitor and manage fleets of connected industrial vehicles deployed across warehouse sites worldwide. The system aggregates operational data from <strong>70,000+ connected vehicles</strong>, providing real-time visibility into vehicle usage, operational status, and safety processes.</p>
+          <p class="bt">Within this platform, supervisors rely on a <strong>high-frequency operational interface</strong> to monitor fleet activity and manage configuration workflows that support daily warehouse operations.</p>
+        </div>
+      </div>
+
+      <!-- THE CHALLENGE -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Challenge</div>
+          <div class="st">Where the System Was Breaking Down</div>
+        </div>
+        <div>
+          <h3 class="sh"><strong>High-frequency workflows had become slow and frustrating</strong></h3>
+          <p class="bt">Warehouse supervisors interacted with the system <strong>dozens of times each day</strong> to monitor fleet activity and manage operational processes. Over time, two critical workflows had become increasingly inefficient.</p>
+          <div class="fgrid">
+            <div class="fc">
+              <h4>Vehicle Monitoring Page</h4>
+              <p>The most frequently used interface displayed <strong>45-50 configurable columns</strong> despite supervisors relying on only <strong>7-8 key fields</strong>. Global search queried the entire vehicle dataset, creating severe performance bottlenecks.</p>
+              <ul>
+                <li><span class="scroll-hl"><strong>30-40 second load times</strong> on the vehicle monitoring page</span></li>
+                <li>5-6 clicks required per checklist question</li>
+              </ul>
+            </div>
+            <div class="fc">
+              <h4>Checklist Creation Workflow</h4>
+              <p>Creating inspection checklists required repeated popup interactions, turning a routine task into a <strong>time-consuming process.</strong></p>
+              <ul>
+                <li><span class="scroll-hl"><strong>~100 clicks</strong> needed for a standard 20-question checklist</span></li>
+                <li>User progress lost if the workflow was interrupted</li>
+              </ul>
+            </div>
+          </div>
+          <p style="font-size:13px;opacity:0.5;line-height:1.65;margin-top:8px;">Early workflow mapping was done manually, while AI later assisted to structure and refine these flows more efficiently.</p>
+        </div>
+      </div>
+
+      <!-- THE SOLUTION -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Solution</div>
+          <div class="st">The Strategic Intervention</div>
+        </div>
+        <div>
+          <h3 class="sh">Redesigning High-Frequency Operational Workflows for Usability and Performance</h3>
+          <p class="bt">This project focused on redesigning two of the most frequently used workflows at the center of daily fleet operations. AI supported the process as a thinking partner - helping explore edge cases, interaction patterns, and validate solution directions.</p>
+
+          <h4 class="sbh">For Vehicle Monitoring</h4>
+          <p class="bt">The interface was restructured to prioritize the most relevant operational data, allowing supervisors to quickly scan fleet information without loading unnecessary columns.</p>
+          <div class="iblock">
+            <div class="ilabel">Key Product Interventions</div>
+            <ul>
+              <li>Single unified search bar replacing multiple search paths</li>
+              <li>Default view with the <strong>7-8 most relevant columns</strong></li>
+              <li>Custom search and saved search views</li>
+              <li>Search history for repeated operational queries</li>
+              <li>Table Settings to control visible columns</li>
+              <li>Grouped column categories (RTLS, operational signals, etc.)</li>
+            </ul>
+          </div>
+
+          <h4 class="sbh">For Checklist Creation</h4>
+          <p class="bt">The workflow was redesigned into a <strong>single-page configuration experience</strong>, eliminating the need for repetitive popup interactions.</p>
+          <div class="iblock">
+            <div class="ilabel">Key Product Interventions</div>
+            <ul>
+              <li>Single-page checklist grid with inline editing</li>
+              <li>Save as Draft to prevent workflow interruption</li>
+              <li>Copy checklist to secondary language</li>
+            </ul>
+          </div>
+
+          <p class="bt" style="margin-top:16px;">The redesign focused on <strong>clarity, speed of interaction, and reduced cognitive load</strong> in an environment where these actions occur repeatedly throughout the day. AI was used selectively for UX copy, naming, and refining interaction details, helping reduce manual effort and improve clarity.</p>
+        </div>
+      </div>
+
+      <!-- THE IMPACT -->
+      <div class="tc reveal">
+        <div class="tc-label">
+          <div class="sl">The Impact</div>
+          <div class="st">What Changed - Measurably</div>
+        </div>
+        <div>
+          <p class="bt">The redesign transformed both workflows into <strong>significantly faster and simpler operational tools.</strong> Vehicle monitoring became faster and more focused by loading only relevant data fields, while checklist configuration moved from a repetitive interaction pattern to a streamlined editing experience.</p>
+
+          <!-- OPTION C STATS -->
+          <div class="stats-c">
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Vehicle page load time</div>
+                <div class="sc-before">30-40 sec</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Now</div>
+                <div class="sc-val">&lt; 3 sec</div>
+                <div class="sc-desc">13x faster</div>
+              </div>
+            </div>
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Columns in default view</div>
+                <div class="sc-before">45-50 columns</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Now</div>
+                <div class="sc-val">7-8</div>
+                <div class="sc-desc">Only what matters</div>
+              </div>
+            </div>
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Checklist effort</div>
+                <div class="sc-before">~100 clicks</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Now</div>
+                <div class="sc-val">5-6</div>
+                <div class="sc-desc">Clicks to complete</div>
+              </div>
+            </div>
+            <div class="sc sc-wide">
+              <div class="sc-top">
+                <div class="sc-label">Workflow structure</div>
+                <div class="sc-before">Popup-based, repetitive interruptions</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Now</div>
+                <div class="sc-val">Single-page grid</div>
+                <div class="sc-desc">Inline editing, no interruptions, no progress loss</div>
+              </div>
+            </div>
+            <div class="sc">
+              <div class="sc-top">
+                <div class="sc-label">Redesign rollout</div>
+                <div class="sc-before">Multiple failed attempts</div>
+              </div>
+              <div class="sc-bot">
+                <div class="sc-now">Now</div>
+                <div class="sc-val">100%</div>
+                <div class="sc-desc">Adopted platform-wide</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="outcome">
+            <div class="olabel">Outcome</div>
+            <p>Supervisors gained <strong>faster access to fleet status and operational data</strong>, allowing them to monitor vehicles and identify issues more efficiently.</p>
+            <p>Operational checklist configuration became significantly easier to manage, reducing friction in setting up and maintaining safety processes across warehouse sites.</p>
+            <p>The platform shifted from a dense operational interface to a <strong>more streamlined workflow experience designed for high-frequency use.</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- LOCKED NAV — Variation 1+3 Hybrid -->
+<div class="cs-nav-section">
+  <div class="cs-nav-box">
+    <div class="cs-nav-lbl">More Case Studies</div>
+    <div class="cs-nav-grid">
+
+      <a href="#" class="cs-card">
+        <div class="cs-thumb">
+          <div class="cs-ghost">01</div>
+          <div class="cs-dir">&#8592; Previous</div>
+          <div class="cs-tag-img">Alert Governance</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-case">Case Study 01</div>
+          <div class="cs-title">Insight-Driven Governance to Guide Global Operations Across 70,000+ Connected Forklifts</div>
+          <div class="cs-desc">Centralised governance layer to detect abnormal SMS alert spikes and restore operational trust across a global industrial fleet.</div>
+          <div class="cs-cta">&#8592; View Case Study</div>
+        </div>
+      </a>
+
+      <a href="#" class="cs-card">
+        <div class="cs-thumb">
+          <div class="cs-ghost">03</div>
+          <div class="cs-dir" style="text-align:right;">Next &#8594;</div>
+          <div class="cs-tag-img" style="text-align:right;">Scheduling Systems</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-case">Case Study 03</div>
+          <div class="cs-title">From Campus Queues to a Capacity-Aware Booking Platform for 15,000+ Students</div>
+          <div class="cs-desc">Led a 7-designer team to streamline how students book gym sessions, yoga classes, and wellness programs.</div>
+          <div class="cs-cta">View Case Study &#8594;</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- SUBSCRIBE -->
+<div class="sub-section">
+  <h3>Stay in the loop</h3>
+  <p>Occasional notes on enterprise UX, systems thinking, and what I'm learning.</p>
+  <div class="sub-form">
+    <input type="email" placeholder="your@email.com">
+    <button class="btn">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Mansi Patel</div>
+  <ul class="footer-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Let's Connect</a></li>
+  </ul>
+  <p class="footer-copy">&#169; 2026 Mansi Patel - Designed dot by dot. Co-created with Claude and Figma Make</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+function checkReveal() { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible'); }); }
+const scrollHls = document.querySelectorAll('.scroll-hl');
+function checkScrollHl() { scrollHls.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight - 50 && r.bottom > 0) el.classList.add('lit'); }); }
+window.addEventListener('scroll', () => { checkReveal(); checkScrollHl(); }, { passive: true });
+checkReveal(); checkScrollHl();
+</script>
+</body>
+</html>
